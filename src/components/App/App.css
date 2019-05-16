@@ -1,0 +1,14 @@
+.App {
+    height: 100vh;
+
+    margin: 0 auto;
+    background-color: #8AAAE5;
+  }
+  
+  .App__main {
+    height: calc(100vh - 70px);
+    overflow: auto;
+    margin-top: 10px;
+    padding-bottom: 40px;
+  }
+  
