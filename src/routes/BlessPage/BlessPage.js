@@ -103,16 +103,6 @@ export default class BlessPage extends Component {
                         </button>
                 </div>
         
-                <div class="form-section">
-                    <p class="dream-date-header">Send Reminders?</p>
-                    <input type="checkbox" name="yes" value="yes"/>Yes<br/>
-                    <input type="checkbox" name="no" value="no"/>No<br/>
-                    <input type="radio" name="occurence" value="Daily"/> Daily<br/>
-                    <input type="radio" name="occurence" value="Weekly"/> Weekly<br/>
-                    <input type="radio" name="occurence" value="Monthly"/> Monthly<br/>
-                    <p>At what time:</p><input type="time" name="usr_time"/>
-                </div>
-        
                 <button type="submit">Save List</button>
                 </form>
             </section>

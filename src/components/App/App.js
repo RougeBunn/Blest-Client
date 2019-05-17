@@ -8,6 +8,7 @@ import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import BlessPage from '../../routes/BlessPage/BlessPage'
 import UserPage from '../../routes/UserPage/UserPage'
 import './App.css'
+import { BlessContext } from '../../context'
 
 class App extends Component {
   state = { hasError: false }
@@ -19,6 +20,7 @@ class App extends Component {
 
   render(){
     return (
+      <BlessContext.Provider>
       <div className='App'>
         <header className='App__header'>
           <Header />
@@ -26,7 +28,7 @@ class App extends Component {
         <main className='App__main'>
           {this.state.hasError && <p className='red'>Sorry there was an error</p>}
           <Switch>
-            {/* <Route
+            {/* {/* <Route
               exact
               path={'/'}
               component={LandingPage}
@@ -38,22 +40,23 @@ class App extends Component {
             <Route
               path={'/register'}
               component={RegistrationPage}
-            />
+            /> */}
             <Route
-              path={'/user/:userId'}
-              component={UserPage} */}
+              path={'/'}
+              component={UserPage}
             />
-            <Route
+            {/* <Route
               exact
               path={'/'}
               component={BlessPage}
-            />
+            /> */}
             <Route
               component={NotFoundPage}
             />
           </Switch>
         </main>
       </div>
+      </BlessContext.Provider>
     )
   }
 }
