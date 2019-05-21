@@ -8,7 +8,7 @@ import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import BlessPage from '../../routes/BlessPage/BlessPage'
 import UserPage from '../../routes/UserPage/UserPage'
 import './App.css'
-import { BlessContext } from '../../context'
+import Context from '../../context'
 
 class App extends Component {
   state = { hasError: false }
@@ -20,7 +20,7 @@ class App extends Component {
 
   render(){
     return (
-      <BlessContext.Provider>
+      <Context.Provider>
       <div className='App'>
         <header className='App__header'>
           <Header />
@@ -56,7 +56,7 @@ class App extends Component {
           </Switch>
         </main>
       </div>
-      </BlessContext.Provider>
+      </Context.Provider>
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './UserPage.css'
 import BlessPage from '../BlessPage/BlessPage';
-import { BlessContext } from '../../context'
+import Context from '../../context'
 
 export default class UserPage extends Component {
     
@@ -13,7 +13,7 @@ export default class UserPage extends Component {
                 </header>
                 <section>
                 <header><h2>I'm thankful for: (you can title this whatever you want)</h2></header>
-                <BlessContext.Consumer></BlessContext.Consumer>
+                <Context.Consumer></Context.Consumer>
                 <button>Edit</button>
                 <button>Delete</button>                       
                 <div class="form-section">

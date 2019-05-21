@@ -1,2 +1,8 @@
 import React from 'react'
-export const BlessContext = React.createContext();
+export default React.createContext({
+    title: '',
+    notify:  false,
+    occurence: '',
+    listItems: [{ blessing: ''}],
+    time: null
+});
