@@ -1,32 +1,57 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Header from '../Header/Header'
-import LandingPage from '../../routes/LandingPage/LandingPage'
-import LoginPage from '../../routes/LoginPage/LoginPage'
-import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
-import BlessPage from '../../routes/BlessPage/BlessPage'
-import UserPage from '../../routes/UserPage/UserPage'
-import './App.css'
-import Context from '../../context'
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import uuidv4 from "uuid";
+import Header from "../Header/Header";
+import LandingPage from "../../routes/LandingPage/LandingPage";
+import LoginPage from "../../routes/LoginPage/LoginPage";
+import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
+import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+import BlessPage from "../../routes/BlessPage/BlessPage";
+import UserPage from "../../routes/UserPage/UserPage";
+import "./App.css";
 
 class App extends Component {
-  state = { hasError: false }
+  state = { hasError: false, listItems: [] };
 
-  static getDerivedStateFromError(error) {
-    console.error(error)
-    return { hasError: true }
+  componentDidMount() {
+    // fetch.get("/blessings").then(data => {
+    //   this.setState({
+    //     blessings: data.blessings
+    //   });
+    // });
+    this.setState({
+      blessings: [
+        {
+          id: uuidv4(),
+          blessing: "football"
+        },
+        {
+          id: uuidv4(),
+          blessing: "basketball"
+        },
+        {
+          id: uuidv4(),
+          blessing: "water"
+        }
+      ]
+    });
   }
 
-  render(){
+  static getDerivedStateFromError(error) {
+    console.error(error);
+    return { hasError: true };
+  }
+
+  render() {
     return (
-      <Context.Provider>
-      <div className='App'>
-        <header className='App__header'>
+      <div className="App">
+        <header className="App__header">
           <Header />
         </header>
-        <main className='App__main'>
-          {this.state.hasError && <p className='red'>Sorry there was an error</p>}
+        <main className="App__main">
+          {this.state.hasError && (
+            <p className="red">Sorry there was an error</p>
+          )}
           <Switch>
             {/* {/* <Route
               exact
@@ -42,22 +67,19 @@ class App extends Component {
               component={RegistrationPage}
             /> */}
             <Route
-              path={'/'}
-              component={UserPage}
+              path={"/"}
+              component={() => <UserPage blessings={this.state.blessings} />}
             />
             {/* <Route
               exact
-              path={'/'}
-              component={BlessPage}
+              path={"/"}
+              component={() => <BlessPage blessings={this.state.blessings} />}
             /> */}
-            <Route
-              component={NotFoundPage}
-            />
+            <Route component={NotFoundPage} />
           </Switch>
         </main>
       </div>
-      </Context.Provider>
-    )
+    );
   }
 }
 
