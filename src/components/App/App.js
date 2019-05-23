@@ -1,17 +1,43 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import uuidv4 from "uuid";
-import Header from "../Header/Header";
-import LandingPage from "../../routes/LandingPage/LandingPage";
-import LoginPage from "../../routes/LoginPage/LoginPage";
-import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
-import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
-import BlessPage from "../../routes/BlessPage/BlessPage";
-import UserPage from "../../routes/UserPage/UserPage";
-import "./App.css";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import uuidv4 from 'uuid';
+import Header from '../Header/Header';
+import LandingPage from '../../routes/LandingPage/LandingPage';
+import LoginPage from '../../routes/LoginPage/LoginPage';
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
+import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
+import BlessPage from '../../routes/BlessPage/BlessPage';
+import UserPage from '../../routes/UserPage/UserPage';
+import './App.css';
+
+export const AppContext = React.createContext();
 
 class App extends Component {
-  state = { hasError: false, listItems: [] };
+  state = {
+    blessings: [],
+    handleAddBlessing: blessing => {
+      const newBlessings = [
+        ...this.state.blessings,
+        {
+          id: uuidv4(),
+          blessing
+        }
+      ];
+      this.setState({
+        blessings: newBlessings
+      });
+    },
+    handleRemoveBlessing: id => {
+      const newBlessings = this.state.blessings.filter(
+        blessing => id !== blessing.id
+      );
+      this.setState({
+        blessings: newBlessings
+      });
+    },
+    hasError: false,
+    listItems: []
+  };
 
   componentDidMount() {
     // fetch.get("/blessings").then(data => {
@@ -19,22 +45,6 @@ class App extends Component {
     //     blessings: data.blessings
     //   });
     // });
-    this.setState({
-      blessings: [
-        {
-          id: uuidv4(),
-          blessing: "football"
-        },
-        {
-          id: uuidv4(),
-          blessing: "basketball"
-        },
-        {
-          id: uuidv4(),
-          blessing: "water"
-        }
-      ]
-    });
   }
 
   static getDerivedStateFromError(error) {
@@ -44,41 +54,34 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App__header">
-          <Header />
-        </header>
-        <main className="App__main">
-          {this.state.hasError && (
-            <p className="red">Sorry there was an error</p>
-          )}
-          <Switch>
-            {/* {/* <Route
-              exact
-              path={'/'}
-              component={LandingPage}
-            />  
-            <Route
-              path={'/login'}
-              component={LoginPage}
-            />
-            <Route
-              path={'/register'}
-              component={RegistrationPage}
-            /> */}
-            <Route
-              path={"/"}
-              component={() => <UserPage blessings={this.state.blessings} />}
-            />
-            {/* <Route
-              exact
-              path={"/"}
-              component={() => <BlessPage blessings={this.state.blessings} />}
-            /> */}
-            <Route component={NotFoundPage} />
-          </Switch>
-        </main>
-      </div>
+      <AppContext.Provider value={this.state}>
+        <div className="App">
+          <header className="App__header">
+            <Header />
+          </header>
+          <main className="App__main">
+            {this.state.hasError && (
+              <p className="red">Sorry there was an error</p>
+            )}
+            <Switch>
+              <Route path={'/login'} component={LoginPage} />
+              <Route path={'/register'} component={RegistrationPage} />
+              <Route
+                exact
+                path={'/'}
+                component={() => <BlessPage blessings={this.state.blessings} />}
+              />
+              <Route
+                path={'/userpage'}
+                component={() => <UserPage blessings={this.state.blessings} />}
+              />
+              <Route component={NotFoundPage} />
+              <Route exact path={'/'} component={LandingPage} />
+            </Switch>
+          </main>
+        </div>
+        )}
+      </AppContext.Provider>
     );
   }
 }

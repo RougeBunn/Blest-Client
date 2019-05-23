@@ -1,31 +1,21 @@
-import React, { Component } from "react";
-import uuidv4 from "uuid";
-import "./BlessPage.css";
-
+import React, { Component } from 'react';
+import { AppContext } from '../../components/App/App';
+import './BlessPage.css';
+import { Link } from 'react-router-dom';
 export default class BlessPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      blessings: [],
-      input: ""
-      //   notify: false,
-      //   occurence: "",
-      //   time: null,
-      //   title: ""
-    };
+  state = {
+    input: ''
+    //   notify: false,
+    //   occurence: "",
+    //   time: null,
+    //   title: ""
+  };
 
-    // this.handleTitleChange = this.handleTitleChange.bind(this);
-    // this.handleOccurChange = this.handleOccurChange.bind(this);
-    // this.handleNotifyChange = this.handleNotifyChange.bind(this);
-    // this.handleTimeChange = this.handleTimeChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      blessings: this.props.blessings
-    });
-  }
+  // this.handleTitleChange = this.handleTitleChange.bind(this);
+  // this.handleOccurChange = this.handleOccurChange.bind(this);
+  // this.handleNotifyChange = this.handleNotifyChange.bind(this);
+  // this.handleTimeChange = this.handleTimeChange.bind(this);
+  // this.handleSubmit = this.handleSubmit.bind(this);
 
   //   handleTitleChange(event) {
   //     this.setState({ title: event.target.value });
@@ -48,29 +38,6 @@ export default class BlessPage extends Component {
   //     this.setState({ listItems: newBlessing });
   //   };
 
-  handleAddBlessing = blessing => {
-    const newBlessings = [
-      ...this.state.blessings,
-      {
-        id: uuidv4(),
-        blessing
-      }
-    ];
-    this.setState({
-      blessings: newBlessings,
-      input: ""
-    });
-  };
-
-  handleRemoveBlessing = id => {
-    const newBlessings = this.state.blessings.filter(
-      blessing => id !== blessing.id
-    );
-    this.setState({
-      blessings: newBlessings
-    });
-  };
-
   //   handleTimeChange(event) {
   //     this.setState({ time: event.target.value });
   //   }
@@ -87,56 +54,66 @@ export default class BlessPage extends Component {
 
   render() {
     return (
-      <>
-        <header>
-          <h1>Your Reflections</h1>
-        </header>
-        <section>
-          <form id="record-dream">
-            <div className="form-section">
-              <input
-                type="text"
-                name="title"
-                className="title"
-                placeholder="~Your Blessings~"
-                // value={this.state.title}
-                // onChange={this.handleTitleChange}
-                // required
-              />
-            </div>
-            <div className="form-section">
-              <label htmlFor="List" />
-              {this.state.blessings.map(blessing => (
-                <div key={blessing.id} className="listItem">
-                  <div>{blessing.blessing}</div>
+      <AppContext.Consumer>
+        {context => (
+          <>
+            <header>
+              <h1>Your Reflections</h1>
+            </header>
+            <section>
+              <button>
+                <Link to="/userpage">Back</Link>
+              </button>
+
+              <form id="record-dream">
+                <div className="form-section">
+                  <input
+                    type="text"
+                    name="title"
+                    className="title"
+                    placeholder="~Your Blessings~"
+                    // value={this.state.title}
+                    // onChange={this.handleTitleChange}
+                    // required
+                  />
+                </div>
+                <div className="form-section">
+                  <label htmlFor="List" />
+                  {context.blessings.map(blessing => (
+                    <div key={blessing.id} className="listItem">
+                      <div>{blessing.blessing}</div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          context.handleRemoveBlessing(blessing.id)
+                        }
+                        className="small"
+                      >
+                        -
+                      </button>
+                    </div>
+                  ))}
+                  <input
+                    type="text"
+                    value={this.state.input}
+                    onChange={this.handleInput}
+                  />
                   <button
                     type="button"
-                    onClick={() => this.handleRemoveBlessing(blessing.id)}
+                    onClick={() => context.handleAddBlessing(this.state.input)}
                     className="small"
+                    disabled={!this.state.input}
                   >
-                    -
+                    +
                   </button>
                 </div>
-              ))}
-              <input
-                type="text"
-                value={this.state.input}
-                onChange={this.handleInput}
-              />
-              <button
-                type="button"
-                onClick={() => this.handleAddBlessing(this.state.input)}
-                className="small"
-                disabled={!this.state.input}
-              >
-                +
-              </button>
-            </div>
 
-            <button type="submit">Save List</button>
-          </form>
-        </section>
-      </>
+                <button type="submit">Save List</button>
+              </form>
+            </section>
+          </>
+        )}
+      </AppContext.Consumer>
     );
   }
 }

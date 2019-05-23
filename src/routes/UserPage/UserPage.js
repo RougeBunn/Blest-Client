@@ -1,46 +1,42 @@
-import React, { Component } from "react";
-import "./UserPage.css";
-import BlessPage from "../BlessPage/BlessPage";
+import React, { Component } from 'react';
+import './UserPage.css';
+import { Link } from 'react-router-dom';
+import { AppContext } from '../../components/App/App';
 
 export default class UserPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <>
-        <header role="banner">
-          <h1>Blest Dashboard</h1>
-        </header>
-        <section>
-          <header>
-            <h2>I'm thankful for: (you can title this whatever you want)</h2>
-          </header>
-          {this.props.blessings.map(blessing => (
-            <div key={blessing.id}>{blessing.blessing}</div>
-          ))}
-          <button>Edit</button>
-          <button>Delete</button>
-          <div className="form-section">
-            <p className="dream-date-header">Send Reminders?</p>
-            <input type="checkbox" name="yes" value="yes" />
-            Yes
-            <br />
-            <input type="checkbox" name="no" value="no" />
-            No
-            <br />
-            <input type="radio" name="occurence" value="Daily" /> Daily
-            <br />
-            <input type="radio" name="occurence" value="Weekly" /> Weekly
-            <br />
-            <input type="radio" name="occurence" value="Monthly" /> Monthly
-            <br />
-            <p>At what time:</p>
-            <input type="time" name="usr_time" />
-          </div>
-        </section>
-      </>
+      <AppContext.Consumer>
+        {context => (
+          <>
+            <header role="banner">
+              <h1>Blest Dashboard</h1>
+            </header>
+            <section>
+              {context.blessings.map(blessing => (
+                <div key={blessing.id}>{blessing.blessing}</div>
+              ))}
+              <Link to="/blesspage">Edit</Link>
+              <div className="form-section">
+                <p className="notify-header">Send Reminders?</p>
+                <input type="checkbox" name="yes" value="yes" />
+                Yes
+                <input type="checkbox" name="no" value="no" />
+                No
+                <br />
+                <input type="radio" name="occurence" value="Daily" /> Daily
+                <br />
+                <input type="radio" name="occurence" value="Weekly" /> Weekly
+                <br />
+                <input type="radio" name="occurence" value="Monthly" /> Monthly
+                <br />
+                <p>At what time:</p>
+                <input type="time" name="usr_time" />
+              </div>
+            </section>
+          </>
+        )}
+      </AppContext.Consumer>
     );
   }
 }
