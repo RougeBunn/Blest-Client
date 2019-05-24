@@ -52,6 +52,13 @@ export default class BlessPage extends Component {
     });
   };
 
+  handleClearAdd(context) {
+    this.setState({
+      input: ''
+    });
+    context.handleAddBlessing(this.state.input);
+  }
+
   render() {
     return (
       <AppContext.Consumer>
@@ -100,7 +107,7 @@ export default class BlessPage extends Component {
                   />
                   <button
                     type="button"
-                    onClick={() => context.handleAddBlessing(this.state.input)}
+                    onClick={() => this.handleClearAdd(context)}
                     className="small"
                     disabled={!this.state.input}
                   >

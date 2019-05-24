@@ -52,6 +52,9 @@ class App extends Component {
     return { hasError: true };
   }
 
+  // Login page will take you userpage which will have basic functionality.
+  //  Authentication and notifications aren't built yet.
+
   render() {
     return (
       <AppContext.Provider value={this.state}>
@@ -68,15 +71,15 @@ class App extends Component {
               <Route path={'/register'} component={RegistrationPage} />
               <Route
                 exact
-                path={'/'}
-                component={() => <BlessPage blessings={this.state.blessings} />}
+                path={'/blesspage'}
+                render={() => <BlessPage blessings={this.state.blessings} />}
               />
               <Route
                 path={'/userpage'}
-                component={() => <UserPage blessings={this.state.blessings} />}
+                render={() => <UserPage blessings={this.state.blessings} />}
               />
+              <Route path={'/'} component={LandingPage} />
               <Route component={NotFoundPage} />
-              <Route exact path={'/'} component={LandingPage} />
             </Switch>
           </main>
         </div>
