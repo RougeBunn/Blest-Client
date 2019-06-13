@@ -74,7 +74,7 @@ export default class BlessPage extends Component {
 
               <form id="record-dream">
                 <div className="form-section">
-                  <input
+                  {/* <input
                     type="text"
                     name="title"
                     className="title"
@@ -82,7 +82,7 @@ export default class BlessPage extends Component {
                     // value={this.state.title}
                     // onChange={this.handleTitleChange}
                     // required
-                  />
+                  /> */}
                 </div>
                 <div className="form-section">
                   <label htmlFor="List" />

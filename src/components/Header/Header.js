@@ -1,10 +1,15 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-//import TokenService from '../../services/token-service'
-import "./Header.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import './Header.css';
 
 export default class Header extends Component {
-  handleLogoutClick = () => {};
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken();
+    // when logging out, clear the callbacks to the refresh api and idle auto logout */
+    TokenService.clearCallbackBeforeExpiry();
+    //IdleService.unRegisterIdleResets();
+  };
 
   renderLogoutLink() {
     return (
@@ -32,8 +37,9 @@ export default class Header extends Component {
           <h1>
             <Link to="/">Blest</Link>
           </h1>
-          {this.renderLogoutLink()}
-          {this.renderLoginLink()}
+          {TokenService.hasAuthToken()
+            ? this.renderLogoutLink()
+            : this.renderLoginLink()}
         </nav>
       </>
     );
