@@ -22,6 +22,7 @@ export default class LoginForm extends Component {
   // }
 
   handleSubmitJwtAuth = ev => {
+    console.log('start');
     ev.preventDefault();
     this.setState({ error: null });
     const { user_name, password } = ev.target;
@@ -33,9 +34,11 @@ export default class LoginForm extends Component {
       .then(res => {
         user_name.value = '';
         password.value = '';
+        console.log('Test then');
         this.props.onLoginSuccess();
       })
       .catch(res => {
+        console.log('catch error');
         this.setState({ error: res.error });
       });
   };

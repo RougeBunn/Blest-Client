@@ -13,6 +13,7 @@ import PublicRoute from '../Utils/PublicRoute';
 //import IdleService from '../../services/idle-service';
 import BlessPage from '../../routes/BlessPage/BlessPage';
 import UserPage from '../../routes/UserPage/UserPage';
+import ListApiService from '../../services/list-api-service';
 import './App.css';
 
 export const AppContext = React.createContext();
@@ -125,7 +126,7 @@ class App extends Component {
               <PublicRoute path={'/register'} component={RegistrationPage} />
               <PrivateRoute
                 exact
-                path={'/blesspage'}
+                path={'/blesspage/:userId'}
                 render={() => <BlessPage blessings={this.state.blessings} />}
               />
               <PrivateRoute

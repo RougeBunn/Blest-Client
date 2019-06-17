@@ -7,7 +7,6 @@ const AuthApiService = {
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8000',
         'content-type': 'application/json'
       },
       body: JSON.stringify(user)
@@ -15,14 +14,13 @@ const AuthApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
-  postLogin({ user_name, password }) {
+  postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8000',
         'content-type': 'application/json'
       },
-      body: JSON.stringify({ user_name, password })
+      body: JSON.stringify(credentials)
     })
       .then(res =>
         !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
@@ -42,13 +40,13 @@ const AuthApiService = {
         return res;
       });
   },
-  postRefreshToken() {
+  postRefreshToken(user) {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8000',
         authorization: `Bearer ${TokenService.getAuthToken()}`
-      }
+      },
+      body: JSON.stringify(user)
     })
       .then(res =>
         !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
