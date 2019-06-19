@@ -6,9 +6,6 @@ import './Header.css';
 export default class Header extends Component {
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    // when logging out, clear the callbacks to the refresh api and idle auto logout */
-    TokenService.clearCallbackBeforeExpiry();
-    //IdleService.unRegisterIdleResets();
   };
 
   renderLogoutLink() {
@@ -31,6 +28,7 @@ export default class Header extends Component {
   }
 
   render() {
+    console.log('before render', TokenService.hasAuthToken());
     return (
       <>
         <nav className="Header">

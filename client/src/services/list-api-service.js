@@ -2,7 +2,7 @@ import TokenService from '../services/token-service';
 import config from '../config';
 
 const ListApiService = {
-  getUserPage() {
+  getUserPage(userId) {
     return fetch(`${config.API_ENDPOINT}/userpage/${userId}`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`
