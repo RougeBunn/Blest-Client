@@ -1,4 +1,7 @@
 require('dotenv').config();
+const authRouter = require('./auth/auth-router');
+const usersRouter = require('./users/users-router');
+const blestListRouter = require('./blestList/blestList-router');
 
 const knex = require('knex');
 const express = require('express');
@@ -7,6 +10,9 @@ const cors = require('cors');
 
 const { PORT, DB_URL } = require('./config');
 app.use(cors());
+const jsonBodyParser = express.json();
+
+app.use(express.static(`${__dirname}/../../client/build`));
 
 const db = knex({
   client: 'pg',
@@ -14,10 +20,9 @@ const db = knex({
 });
 
 app.set('db', db);
-
-app.get('/api/*', (req, res) => {
-  res.json({ ok: true });
-});
+app.use('/api/auth/', authRouter);
+app.use('/api/auth/', usersRouter);
+app.use('/api/auth/', blestListRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 

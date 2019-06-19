@@ -17,7 +17,6 @@ app.use(
 app.use(cors());
 app.use(helmet());
 
-app.use(authRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 

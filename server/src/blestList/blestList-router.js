@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const BlestListService = require('./comments-service');
+const BlestListService = require('./blestList-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 
 const blestListRouter = express.Router();
