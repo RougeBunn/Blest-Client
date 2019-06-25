@@ -7,7 +7,7 @@ const blestListRouter = express.Router();
 const jsonBodyParser = express.json();
 
 blestListRouter
-  .route('/blesspage/:userId')
+  .route('/blesspage/:user_id')
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { author_id, text } = req.body;
     const newBlessing = { author_id, text };

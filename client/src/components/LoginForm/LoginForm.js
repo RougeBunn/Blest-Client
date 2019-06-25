@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 import { Button, Input } from '../Utils/Utils';
 
@@ -9,20 +10,7 @@ export default class LoginForm extends Component {
 
   state = { error: null };
 
-  // handleSubmitBasicAuth = ev => {
-  //   ev.preventDefault()
-  //   const { user_name, password } = ev.target
-
-  //   console.log('login form submitted')
-  //   console.log({ user_name, password })
-
-  //   user_name.value = ''
-  //   password.value = ''
-  //   this.props.onLoginSuccess()
-  // }
-
   handleSubmitJwtAuth = ev => {
-    console.log('start');
     ev.preventDefault();
     this.setState({ error: null });
     const { user_name, password } = ev.target;
@@ -34,11 +22,10 @@ export default class LoginForm extends Component {
       .then(res => {
         user_name.value = '';
         password.value = '';
-        console.log('Test then');
+        TokenService.saveAuthToken(res.authToken);
         this.props.onLoginSuccess();
       })
       .catch(res => {
-        console.log('catch error');
         this.setState({ error: res.error });
       });
   };
@@ -46,11 +33,7 @@ export default class LoginForm extends Component {
   render() {
     const { error } = this.state;
     return (
-      <form
-        className="LoginForm"
-        //onSubmit={this.handleSubmitBasicAuth}
-        onSubmit={this.handleSubmitJwtAuth}
-      >
+      <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
         <div className="user_name">
           <label htmlFor="LoginForm__user_name">User name</label>

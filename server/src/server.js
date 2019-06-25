@@ -24,6 +24,8 @@ app.use('/api/auth/', authRouter);
 app.use('/api/auth/', usersRouter);
 app.use('/api/auth/', blestListRouter);
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Listening on port http://localhost:${PORT}`)
+);
 
 module.exports = { app };

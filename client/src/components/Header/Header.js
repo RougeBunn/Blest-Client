@@ -30,16 +30,14 @@ export default class Header extends Component {
   render() {
     console.log('before render', TokenService.hasAuthToken());
     return (
-      <>
-        <nav className="Header">
-          <h1>
-            <Link to="/">Blest</Link>
-          </h1>
-          {TokenService.hasAuthToken()
-            ? this.renderLogoutLink()
-            : this.renderLoginLink()}
-        </nav>
-      </>
+      <nav className="Header">
+        <h1>
+          <Link to="/">Blest</Link>
+        </h1>
+        {TokenService.hasAuthToken()
+          ? this.renderLogoutLink()
+          : this.renderLoginLink()}
+      </nav>
     );
   }
 }
