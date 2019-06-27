@@ -6,6 +6,7 @@ import './Header.css';
 export default class Header extends Component {
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
+    this.forceUpdate();
   };
 
   renderLogoutLink() {
@@ -22,18 +23,26 @@ export default class Header extends Component {
     return (
       <div className="Header__not-logged-in">
         <Link to="/login">Log in</Link>
+        {/* <Link to="/login" onClick={this.handleLoginClick()}> */}
+        {/* </Link> */}
         <Link to="/register">Sign Up</Link>
       </div>
     );
   }
 
+  handleLoginClick = () => {
+    this.setState({ isLoggedIn: TokenService.hasAuthToken() });
+  };
+
   render() {
+    // console.log('logged in?', this.state.isLoggedIn);
     console.log('before render', TokenService.hasAuthToken());
     return (
       <nav className="Header">
         <h1>
           <Link to="/">Blest</Link>
         </h1>
+        {/* {this.renderSwitch()} */}
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}

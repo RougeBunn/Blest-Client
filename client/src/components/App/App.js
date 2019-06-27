@@ -17,6 +17,7 @@ export const AppContext = React.createContext();
 
 class App extends Component {
   state = {
+    hasError: false
     //blessings: [],
     // handleAddBlessing: blessing => {
     //   const newBlessings = [
@@ -38,7 +39,7 @@ class App extends Component {
     //     blessings: newBlessings
     //   });
     // },
-    hasError: false
+
     // listItems: []
   };
 
@@ -46,6 +47,7 @@ class App extends Component {
     console.error(error);
     return { hasError: true };
   }
+
   componentDidMount() {
     // fetch.get("/blessings").then(data => {
     //   this.setState({
@@ -57,33 +59,37 @@ class App extends Component {
   }
   render() {
     return (
-      // <AppContext.Provider value={this.state}>
-      <div className="App">
-        <header className="App__header">
-          <Header />
-        </header>
-        <main className="App__main">
-          {this.state.hasError && (
-            <p className="red">Sorry there was an error</p>
-          )}
-          <Switch>
-            <Route exact path={'/'} component={LandingPage} />
-            <PublicOnlyRoute path={'/login'} component={LoginPage} />
-            <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
-            <PrivateRoute
-              exact
-              path={'/blesspage/:userid'}
-              render={() => <BlessPage blessings={this.state.blessings} />}
-            />
-            <PrivateRoute
-              path={'/userpage/:userid'}
-              render={() => <UserPage blessings={this.state.blessings} />}
-            />
-            <Route component={NotFoundPage} />
-          </Switch>
-        </main>
-      </div>
-      /* </AppContext.Provider> */
+      <AppContext.Provider value={this.state}>
+        <div className="App">
+          <header className="App__header">
+            <Header />
+          </header>
+          <main className="App__main">
+            {this.state.hasError && (
+              <p className="red">Sorry there was an error</p>
+            )}
+            <Switch>
+              <Route exact path={'/'} component={LandingPage} />
+              <PublicOnlyRoute path={'/login'} component={LoginPage} />
+              <PublicOnlyRoute
+                path={'/register'}
+                component={RegistrationPage}
+              />
+              <PrivateRoute
+                path={'/blesspage/:userid'}
+                component={BlessPage}
+                // render={() => <BlessPage blessings={this.state.blessings} />}
+              />
+              <PrivateRoute
+                path={'/userpage/:userid'}
+                component={UserPage}
+                // render={() => <UserPage blessings={this.state.blessings} />}
+              />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </main>
+        </div>
+      </AppContext.Provider>
     );
   }
 }
