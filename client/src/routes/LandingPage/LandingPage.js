@@ -15,7 +15,7 @@ export default class LandingPage extends Component {
             to be thankful in your life.{' '}
           </p>
           <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/300" />
+            <img alt="placeholder" src="https://via.placeholder.com/300" />
           </a>
         </section>
         <section>
@@ -29,7 +29,7 @@ export default class LandingPage extends Component {
             provide you the space to meditate on your blessings.
           </p>
           <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/300" />
+            <img alt="placeholder" src="https://via.placeholder.com/300" />
           </a>
         </section>
         <section>
@@ -41,7 +41,7 @@ export default class LandingPage extends Component {
             send phone notifications of one thing from your list at any time.
           </p>
           <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/300" />
+            <img alt="placeholder" src="https://via.placeholder.com/300" />
           </a>
         </section>
       </main>

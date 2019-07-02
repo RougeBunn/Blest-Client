@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import uuidv4 from 'uuid';
+//import uuidv4 from 'uuid';
 import Header from '../Header/Header';
 import LandingPage from '../../routes/LandingPage/LandingPage';
 import LoginPage from '../../routes/LoginPage/LoginPage';
@@ -10,14 +10,21 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import BlessPage from '../../routes/BlessPage/BlessPage';
 import UserPage from '../../routes/UserPage/UserPage';
-import ListApiService from '../../services/list-api-service';
+//import ListApiService from '../../services/list-api-service';
 import './App.css';
 
+// export const AppContext = React.createContext({
+//   isLoggedIn: false,
+//   setLoggedInState: () => {}
+// });
 export const AppContext = React.createContext();
 
 class App extends Component {
   state = {
-    hasError: false
+    hasError: false,
+    isLoggedIn: false,
+    setLoggedInState: this.setLoggedInState
+
     //blessings: [],
     // handleAddBlessing: blessing => {
     //   const newBlessings = [
@@ -42,12 +49,11 @@ class App extends Component {
 
     // listItems: []
   };
-
-  static getDerivedStateFromError(error) {
-    console.error(error);
-    return { hasError: true };
-  }
-
+  setLoggedInState = isLoggedIn => {
+    this.setState({
+      isLoggedIn
+    });
+  };
   componentDidMount() {
     // fetch.get("/blessings").then(data => {
     //   this.setState({
@@ -58,12 +64,15 @@ class App extends Component {
     //  Authentication and notifications aren't built yet.
   }
   render() {
+    console.log('current state', this.state);
     return (
-      <AppContext.Provider value={this.state}>
+      <AppContext.Provider value={{ state: this.state }}>
         <div className="App">
+          <h1>test 1</h1>
           <header className="App__header">
             <Header />
           </header>
+          <h2>test 2</h2>
           <main className="App__main">
             {this.state.hasError && (
               <p className="red">Sorry there was an error</p>
@@ -77,13 +86,11 @@ class App extends Component {
               />
               <PrivateRoute
                 path={'/blesspage/:userid'}
-                component={BlessPage}
-                // render={() => <BlessPage blessings={this.state.blessings} />}
+                render={() => <BlessPage blessings={this.state.blessings} />}
               />
               <PrivateRoute
                 path={'/userpage/:userid'}
-                component={UserPage}
-                // render={() => <UserPage blessings={this.state.blessings} />}
+                render={() => <UserPage blessings={this.state.blessings} />}
               />
               <Route component={NotFoundPage} />
             </Switch>

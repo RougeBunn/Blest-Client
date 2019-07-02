@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service';
+import { AppContext } from '../App/App';
 import { Button, Input } from '../Utils/Utils';
 
 export default class LoginForm extends Component {
@@ -22,6 +23,9 @@ export default class LoginForm extends Component {
         user_name.value = '';
         password.value = '';
         this.props.onLoginSuccess();
+        //console.log('set logged in', this.props.setLoggedInState);
+        console.log('value', this.value);
+        //this.props.setLoggedInState(true);
       })
       .catch(res => {
         this.setState({ error: res.error });
