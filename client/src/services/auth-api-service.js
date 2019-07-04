@@ -15,6 +15,7 @@ const AuthApiService = {
       )
       .then(res => {
         TokenService.saveAuthToken(res.authToken);
+        //console.log('saving auth', saveAuthToken(res.authToken));
       });
   },
   postUser(user) {

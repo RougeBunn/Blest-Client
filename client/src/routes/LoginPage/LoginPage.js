@@ -15,6 +15,7 @@ export default class LoginPage extends Component {
   handleLoginSuccess = () => {
     const { location, history } = this.props;
     const destination = location.state || {}.from || '/';
+    console.log('destination');
     history.push(destination);
   };
 
@@ -35,11 +36,11 @@ export default class LoginPage extends Component {
       <AppContext.Consumer>
         {value => (
           <Section className="LoginPage">
-            {console.log(value)}
+            {console.log('current value', value)}
             <h2>Login</h2>
             <LoginForm
               onLoginSuccess={this.handleLoginSuccess}
-              // setLoggedInState={setLoggedInState}
+              setLoggedInState={value.setLoggedInState}
             />
           </Section>
         )}

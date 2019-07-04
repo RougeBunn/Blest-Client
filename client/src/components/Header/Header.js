@@ -7,12 +7,15 @@ import './Header.css';
 export default class Header extends Component {
   static defaultProps = {
     isLoggedIn: false,
-    value: null
+    value: null,
+    toggleLoggedIn: () => {}
   };
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    // this.props.isLoggedIn = false;
+    console.log('loggedin props', this.props);
+    this.props.setLoggedInState(false);
+    console.log('loggedin State', this.props.state);
   };
 
   renderLogoutLink() {
@@ -34,16 +37,22 @@ export default class Header extends Component {
     );
   }
 
+  // toggleLoggedIn() {
+  //   const loginState = window.localStorage.getItem(config.TOKEN_KEY);
+  //   this.setState({ isLoggedIn: loginState });
+  // }
+
   render() {
     return (
       <AppContext.Consumer>
-        {({ isLoggedIn }) => (
+        {value => (
           <nav className="Header">
-            {console.log('is logged in', isLoggedIn)}
             <h1>
               <Link to="/">Blest</Link>
             </h1>
-            {isLoggedIn ? this.renderLogoutLink() : this.renderLoginLink()}
+            {value.state.isLoggedIn
+              ? this.renderLogoutLink()
+              : this.renderLoginLink()}
           </nav>
         )}
       </AppContext.Consumer>

@@ -10,6 +10,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import BlessPage from '../../routes/BlessPage/BlessPage';
 import UserPage from '../../routes/UserPage/UserPage';
+import TokenService from '../../services/token-service';
 //import ListApiService from '../../services/list-api-service';
 import './App.css';
 
@@ -22,8 +23,8 @@ export const AppContext = React.createContext();
 class App extends Component {
   state = {
     hasError: false,
-    isLoggedIn: false,
-    setLoggedInState: this.setLoggedInState
+    isLoggedIn: false
+    //setLoggedInState: this.setLoggedInState
 
     //blessings: [],
     // handleAddBlessing: blessing => {
@@ -49,12 +50,18 @@ class App extends Component {
 
     // listItems: []
   };
+
   setLoggedInState = isLoggedIn => {
     this.setState({
       isLoggedIn
     });
   };
+
   componentDidMount() {
+    const userToken = TokenService.getAuthToken();
+    if (userToken) {
+      this.setLoggedInState(true);
+    }
     // fetch.get("/blessings").then(data => {
     //   this.setState({
     //     blessings: data.blessings
@@ -66,13 +73,15 @@ class App extends Component {
   render() {
     console.log('current state', this.state);
     return (
-      <AppContext.Provider value={{ state: this.state }}>
+      <AppContext.Provider
+        value={{ state: this.state, setLoggedInState: this.setLoggedInState }}
+      >
         <div className="App">
           <h1>test 1</h1>
           <header className="App__header">
-            <Header />
+            <Header setLoggedInState={this.setLoggedInState} />
           </header>
-          <h2>test 2</h2>
+          <h2>test</h2>
           <main className="App__main">
             {this.state.hasError && (
               <p className="red">Sorry there was an error</p>
