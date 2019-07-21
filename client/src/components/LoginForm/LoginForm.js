@@ -22,10 +22,8 @@ export default class LoginForm extends Component {
       .then(res => {
         user_name.value = '';
         password.value = '';
-        this.props.onLoginSuccess();
-        // console.log('set logged in', this.props.setLoggedInState);
-        // console.log('value', this.value);
         this.props.setLoggedInState(true);
+        this.props.onLoginSuccess(res.id);
       })
       .catch(res => {
         this.setState({ error: res.error });

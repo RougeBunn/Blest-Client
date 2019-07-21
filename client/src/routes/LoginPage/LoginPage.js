@@ -12,27 +12,15 @@ export default class LoginPage extends Component {
     }
   };
 
-  handleLoginSuccess = () => {
-    const { location, history } = this.props;
-    const destination = location.state || {}.from || '/';
-    console.log('destination');
-    history.push(destination);
+  handleLoginSuccess = userId => {
+    // const { location, history } = this.props;
+    // const destination = location.state || {}.from || '/';
+    // history.push(destination);
+    this.props.history.push(`/userpage/${userId}`);
   };
 
   render() {
     return (
-      // <AppContext.Consumer>
-      //   {({ setLoggedInState }) => (
-      //     <Section className="LoginPage">
-      //       {console.log(setLoggedInState)}
-      //       <h2>Login</h2>
-      //       <LoginForm
-      //         onLoginSuccess={this.handleLoginSuccess}
-      //         setLoggedInState={setLoggedInState}
-      //       />
-      //     </Section>
-      //   )}
-      // </AppContext.Consumer>
       <AppContext.Consumer>
         {value => (
           <Section className="LoginPage">

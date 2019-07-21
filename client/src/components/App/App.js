@@ -11,49 +11,78 @@ import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import BlessPage from '../../routes/BlessPage/BlessPage';
 import UserPage from '../../routes/UserPage/UserPage';
 import TokenService from '../../services/token-service';
-//import ListApiService from '../../services/list-api-service';
+import ListApiService from '../../services/list-api-service';
 import './App.css';
 
-// export const AppContext = React.createContext({
-//   isLoggedIn: false,
-//   setLoggedInState: () => {}
-// });
 export const AppContext = React.createContext();
 
 class App extends Component {
   state = {
     hasError: false,
-    isLoggedIn: false
-    //setLoggedInState: this.setLoggedInState
-
-    //blessings: [],
-    // handleAddBlessing: blessing => {
-    //   const newBlessings = [
-    //     ...this.state.blessings,
-    //     {
-    //       id: uuidv4(),
-    //       blessing
-    //     }
-    //   ];
-    //   this.setState({
-    //     blessings: newBlessings
-    //   });
-    // },
-    // handleRemoveBlessing: id => {
-    //   const newBlessings = this.state.blessings.filter(
-    //     blessing => id !== blessing.id
-    //   );
-    //   this.setState({
-    //     blessings: newBlessings
-    //   });
-    // },
+    isLoggedIn: false,
+    blessingsFetched: false,
+    blessings: []
 
     // listItems: []
   };
 
-  setLoggedInState = isLoggedIn => {
+  /**
+   * @param isUserLoggedIn boolean
+   */
+  setLoggedInState = isUserLoggedIn => {
     this.setState({
-      isLoggedIn
+      isLoggedIn: isUserLoggedIn
+    });
+  };
+
+  /**
+   * @param userId number
+   */
+  fetchBlessings = userId => {
+    if (this.state.blessingsFetched === false) {
+      ListApiService.getUserWithBlessings(userId).then(
+        blessingsFetchedFromAPI => {
+          this.setState({
+            blessings: blessingsFetchedFromAPI,
+            blessingsFetched: true
+          });
+        }
+      );
+    }
+  };
+
+  /**
+   * @param blessing { id: number, blessing: string }
+   */
+  updateBlessing = blessing => {
+    const blessingWithoutModified = this.state.blessings.filter(
+      b => b.id !== blessing.id
+    );
+    this.setState({
+      blessings: [...blessingWithoutModified, blessing]
+    });
+  };
+
+  saveBlessing = id => {
+    const blessingToSave = this.state.blessings.find(b => b.id === id);
+    console.log(blessingToSave, 'SAVE THIS');
+  };
+
+  deleteBlessing = id => {
+    const leftOverBlessings = this.state.blessings.filter(b => b.id !== id);
+    ListApiService.deleteBlessing(id).then(() => {
+      this.setState({
+        blessings: leftOverBlessings
+      });
+    });
+    // TODO: catch block that would handle API errors and such
+  };
+
+  addBlessing = blessing => {
+    ListApiService.addBlessing(blessing).then(responseFromAPI => {
+      this.setState({
+        blessings: [...this.state.blessings, responseFromAPI.blessing[0]]
+      });
     });
   };
 
@@ -62,26 +91,25 @@ class App extends Component {
     if (userToken) {
       this.setLoggedInState(true);
     }
-    // fetch.get("/blessings").then(data => {
-    //   this.setState({
-    //     blessings: data.blessings
-    //   });
-    // });
     // Login page will take you userpage which will have basic functionality.
-    //  Authentication and notifications aren't built yet.
+    // Authentication and notifications aren't built yet.
   }
   render() {
     console.log('current state', this.state);
     return (
       <AppContext.Provider
-        value={{ state: this.state, setLoggedInState: this.setLoggedInState }}
+        value={{
+          state: this.state,
+          // setIsUserLogedIn
+          // setAuth
+          setLoggedInState: this.setLoggedInState,
+          blessings: this.state.blessings
+        }}
       >
         <div className="App">
-          <h1>test 1</h1>
           <header className="App__header">
             <Header setLoggedInState={this.setLoggedInState} />
           </header>
-          <h2>test</h2>
           <main className="App__main">
             {this.state.hasError && (
               <p className="red">Sorry there was an error</p>
@@ -93,13 +121,34 @@ class App extends Component {
                 path={'/register'}
                 component={RegistrationPage}
               />
-              <PrivateRoute
+              {/* <PrivateRoute
                 path={'/blesspage/:userid'}
                 render={() => <BlessPage blessings={this.state.blessings} />}
+              /> */}
+              {/* <PrivateRoute path={'/userpage/:userId'} component={UserPage} /> */}
+              <PrivateRoute
+                path={'/userpage/:userId'}
+                component={props => (
+                  <UserPage
+                    {...props}
+                    blessings={this.state.blessings}
+                    fetchBlessings={this.fetchBlessings}
+                  />
+                )}
               />
               <PrivateRoute
-                path={'/userpage/:userid'}
-                render={() => <UserPage blessings={this.state.blessings} />}
+                path={'/blesspage/:userId'}
+                component={props => (
+                  <BlessPage
+                    {...props}
+                    fetchBlessings={this.fetchBlessings}
+                    blessings={this.state.blessings}
+                    updateBlessing={this.updateBlessing}
+                    saveBlessing={this.saveBlessing}
+                    addBlessing={this.addBlessing}
+                    deleteBlessing={this.deleteBlessing}
+                  />
+                )}
               />
               <Route component={NotFoundPage} />
             </Switch>

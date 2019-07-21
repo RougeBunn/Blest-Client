@@ -2,7 +2,7 @@ require('dotenv').config();
 const { NODE_ENV } = require('./config');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/users-router');
-const blestListRouter = require('./blestList/blestList-router');
+const blessingsRouter = require('./blessings/blessings-router');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -33,7 +33,7 @@ const db = knex({
 app.set('db', db);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-//app.use('/api/auth', blestListRouter);
+app.use('/api/blessings', blessingsRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

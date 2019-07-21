@@ -5,6 +5,15 @@ const UsersService = require('./users-service');
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
 
+// TODO: authenticate and authorize
+usersRouter.get('/:id', jsonBodyParser, (req, res, next) => {
+  const userId = req.params.id;
+  UsersService.get(req.app.get('db'), userId).then(user => {
+    res.json(user);
+    res.json(UsersService.serializeUser(user));
+  });
+});
+
 usersRouter.post('/', jsonBodyParser, (req, res, next) => {
   const { password, user_name, full_name } = req.body;
 

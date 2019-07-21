@@ -4,61 +4,21 @@ import './BlessPage.css';
 import { Link } from 'react-router-dom';
 export default class BlessPage extends Component {
   state = {
-    input: ''
-    //   notify: false,
-    //   occurence: "",
-    //   time: null,
-    //   title: ""
+    title: ''
   };
 
-  // this.handleTitleChange = this.handleTitleChange.bind(this);
-  // this.handleOccurChange = this.handleOccurChange.bind(this);
-  // this.handleNotifyChange = this.handleNotifyChange.bind(this);
-  // this.handleTimeChange = this.handleTimeChange.bind(this);
-  // this.handleSubmit = this.handleSubmit.bind(this);
-
-  //   handleTitleChange(event) {
-  //     this.setState({ title: event.target.value });
-  //   }
-
-  //   handleNotifyChange(event) {
-  //     this.setState({ notify: event.target.value });
-  //   }
-
-  //   handleOccurChange(event) {
-  //     this.setState({ occurence: event.target.value });
-  //   }
-
-  //   handleBlessingInput = idx => evt => {
-  //     const newBlessing = this.state.listItems.map((listItem, blessIndex) => {
-  //       if (idx !== blessIndex) return listItem;
-  //       return { ...listItem, name: evt.target.value };
-  //     });
-
-  //     this.setState({ listItems: newBlessing });
-  //   };
-
-  //   handleTimeChange(event) {
-  //     this.setState({ time: event.target.value });
-  //   }
-
-  handleSubmit(event) {
-    event.preventDefault();
+  componentDidMount() {
+    // const { userId } = this.props.match.params;
+    const userId = this.props.match.params.userId;
+    // props == {
+    //   match: {
+    //     params: {
+    //       userId: 1 // userId is what is in route definition
+    //     }
+    //   }
+    // }
+    this.props.fetchBlessings(userId);
   }
-
-  handleInput = e => {
-    this.setState({
-      input: e.target.value
-    });
-  };
-
-  handleClearAdd(context) {
-    this.setState({
-      input: ''
-    });
-    context.handleAddBlessing(this.state.input);
-  }
-
   render() {
     return (
       <AppContext.Consumer>
@@ -72,7 +32,7 @@ export default class BlessPage extends Component {
                 <Link to="/userpage">Back</Link>
               </button>
 
-              <form id="record-dream">
+              <form id="record-blessing">
                 <div className="form-section">
                   {/* <input
                     type="text"
@@ -86,36 +46,54 @@ export default class BlessPage extends Component {
                 </div>
                 <div className="form-section">
                   <label htmlFor="List" />
-                  {context.blessings.map(blessing => (
+                  {this.props.blessings.map(blessing => (
                     <div key={blessing.id} className="listItem">
                       <div>{blessing.blessing}</div>
-                      <button
+                      {/* <button
                         type="button"
-                        onClick={() =>
-                          context.handleRemoveBlessing(blessing.id)
-                        }
+                        onClick={e => {
+                          // TODO: update in db through API
+                          e.preventDefault();
+                          this.props.saveBlessing(blessing.id);
+                        }}
                         className="small"
                       >
-                        -
+                        Save/Update
+                      </button> */}
+                      <button
+                        type="button"
+                        onClick={e => this.props.deleteBlessing(blessing.id)}
+                        className="small"
+                      >
+                        Delete
                       </button>
                     </div>
                   ))}
                   <input
                     type="text"
-                    value={this.state.input}
-                    onChange={this.handleInput}
+                    value={this.state.title}
+                    onChange={e => this.setState({ title: e.target.value })}
                   />
                   <button
                     type="button"
-                    onClick={() => this.handleClearAdd(context)}
+                    onClick={() =>
+                      this.props.addBlessing({
+                        blessing: this.state.title,
+                        userId: this.props.match.params.userId
+                      })
+                    }
                     className="small"
-                    disabled={!this.state.input}
                   >
-                    +
+                    Add Blessing
                   </button>
                 </div>
 
-                <button type="submit">Save List</button>
+                <button type="submit">
+                  {' '}
+                  <Link to={`/userpage/${this.props.match.params.userId}`}>
+                    Back to Home
+                  </Link>
+                </button>
               </form>
             </section>
           </>

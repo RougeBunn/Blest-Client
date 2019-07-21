@@ -42,6 +42,14 @@ const UsersService = {
       user_name: xss(user.user_name),
       date_created: new Date(user.date_created)
     };
+  },
+  get(db, id) {
+    return db
+      .from('blest_users as user')
+      .select('*')
+      .where('user.id', id)
+      .leftJoin('blest_list AS list', 'list.author_id', 'user.id');
+    // .first();
   }
 };
 
