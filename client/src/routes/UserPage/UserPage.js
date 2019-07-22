@@ -5,22 +5,9 @@ import { AppContext } from '../../components/App/App';
 import ListApiService from '../../services/list-api-service';
 
 export default class UserPage extends Component {
-  // state = {
-  //   blessListItem: [
-  //     { id: [1, 2, 3] },
-  //     { blessing: ['data', 'something', 'anotherthing'] }
-  //   ]
-  // };
   componentDidMount() {
     // const { userId } = this.props.match.params;
     const userId = this.props.match.params.userId;
-    // props == {
-    //   match: {
-    //     params: {
-    //       userId: 1 // userId is what is in route definition
-    //     }
-    //   }
-    // }
     this.props.fetchBlessings(userId);
   }
   render() {
@@ -35,13 +22,11 @@ export default class UserPage extends Component {
           {this.props.blessings.map(blessing => (
             <div key={blessing.id}>{blessing.blessing}</div>
           ))}
-          {/* <div>{this.state.blessListItem.map()}</div>
-        <div>{this.blessListItem}</div> */}
+
           <Link to={'/blesspage/'.concat(this.props.match.params.userId)}>
             Edit
           </Link>
-          {/* <Link to={`/blesspage/${this.props.match.params.userId}`}>Edit</Link> */}
-          {/* <Link to="/blesspage/:userId">Edit</Link> */}
+
           <div className="form-section">
             <p className="notify-header">Send Reminders?</p>
             <input type="checkbox" name="yes" value="yes" />

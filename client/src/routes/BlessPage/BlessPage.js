@@ -10,31 +10,18 @@ export default class BlessPage extends Component {
   componentDidMount() {
     // const { userId } = this.props.match.params;
     const userId = this.props.match.params.userId;
-    // props == {
-    //   match: {
-    //     params: {
-    //       userId: 1 // userId is what is in route definition
-    //     }
-    //   }
-    // }
     this.props.fetchBlessings(userId);
   }
   render() {
     return (
-      <AppContext.Consumer>
-        {context => (
-          <>
-            <header>
-              <h1>Your Reflections</h1>
-            </header>
-            <section>
-              <button>
-                <Link to="/userpage">Back</Link>
-              </button>
-
-              <form id="record-blessing">
-                <div className="form-section">
-                  {/* <input
+      <>
+        <header>
+          <h1>Your Reflections</h1>
+        </header>
+        <section>
+          <form id="record-blessing">
+            <div className="form-section">
+              {/* <input
                     type="text"
                     name="title"
                     className="title"
@@ -43,13 +30,13 @@ export default class BlessPage extends Component {
                     // onChange={this.handleTitleChange}
                     // required
                   /> */}
-                </div>
-                <div className="form-section">
-                  <label htmlFor="List" />
-                  {this.props.blessings.map(blessing => (
-                    <div key={blessing.id} className="listItem">
-                      <div>{blessing.blessing}</div>
-                      {/* <button
+            </div>
+            <div className="form-section">
+              <label htmlFor="List" />
+              {this.props.blessings.map(blessing => (
+                <div key={blessing.id} className="listItem">
+                  <div id="blessing">{blessing.blessing}</div>
+                  {/* <button
                         type="button"
                         onClick={e => {
                           // TODO: update in db through API
@@ -60,45 +47,43 @@ export default class BlessPage extends Component {
                       >
                         Save/Update
                       </button> */}
-                      <button
-                        type="button"
-                        onClick={e => this.props.deleteBlessing(blessing.id)}
-                        className="small"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  ))}
-                  <input
-                    type="text"
-                    value={this.state.title}
-                    onChange={e => this.setState({ title: e.target.value })}
-                  />
                   <button
                     type="button"
-                    onClick={() =>
-                      this.props.addBlessing({
-                        blessing: this.state.title,
-                        userId: this.props.match.params.userId
-                      })
-                    }
+                    onClick={e => this.props.deleteBlessing(blessing.id)}
                     className="small"
                   >
-                    Add Blessing
+                    Delete
                   </button>
                 </div>
+              ))}
+              <input
+                type="text"
+                value={this.state.title}
+                onChange={e => this.setState({ title: e.target.value })}
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  this.props.addBlessing({
+                    blessing: this.state.title,
+                    userId: this.props.match.params.userId
+                  })
+                }
+                className="small"
+              >
+                Add Blessing
+              </button>
+            </div>
 
-                <button type="submit">
-                  {' '}
-                  <Link to={`/userpage/${this.props.match.params.userId}`}>
-                    Back to Home
-                  </Link>
-                </button>
-              </form>
-            </section>
-          </>
-        )}
-      </AppContext.Consumer>
+            <button type="submit">
+              {' '}
+              <Link to={`/userpage/${this.props.match.params.userId}`}>
+                Back to Home
+              </Link>
+            </button>
+          </form>
+        </section>
+      </>
     );
   }
 }
