@@ -1,5 +1,5 @@
 .Header {
-  height: 40px;
+  height: 48px;
   display: flex;
   align-items: normal;
   justify-content: space-between;
@@ -9,6 +9,14 @@
 
 .Header h1 {
   margin: 0 25px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 400;
+  color: #8aaae5;
+}
+
+.Header h1 a {
+  color: #8aaae5;
+  text-decoration: none;
 }
 
 .Header a {
@@ -52,7 +60,8 @@
   }
 
   .Header h1 {
-    font-size: 22pt;
+    font-size: 28pt;
+    color: #8aaae5;
   }
 }
 

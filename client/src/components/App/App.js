@@ -13,6 +13,7 @@ import UserPage from '../../routes/UserPage/UserPage';
 import TokenService from '../../services/token-service';
 import ListApiService from '../../services/list-api-service';
 import './App.css';
+import '../../index.css';
 
 export const AppContext = React.createContext();
 
@@ -39,6 +40,7 @@ class App extends Component {
    * @param userId number
    */
   fetchBlessings = userId => {
+    console.log('user Id:', userId);
     if (this.state.blessingsFetched === false) {
       ListApiService.getUserWithBlessings(userId).then(
         blessingsFetchedFromAPI => {
@@ -91,8 +93,6 @@ class App extends Component {
     if (userToken) {
       this.setLoggedInState(true);
     }
-    // Login page will take you userpage which will have basic functionality.
-    // Authentication and notifications aren't built yet.
   }
   render() {
     console.log('current state', this.state);

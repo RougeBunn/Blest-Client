@@ -26,8 +26,8 @@ export default class UserPage extends Component {
           <Link to={'/blesspage/'.concat(this.props.match.params.userId)}>
             Edit
           </Link>
-
-          <div className="form-section">
+          {/* Notifications not impletmented yet. Could not find a workable solution */}
+          {/* <div className="form-section">
             <p className="notify-header">Send Reminders?</p>
             <input type="checkbox" name="yes" value="yes" />
             Yes
@@ -42,7 +42,7 @@ export default class UserPage extends Component {
             <br />
             <p>At what time:</p>
             <input type="time" name="usr_time" />
-          </div>
+          </div> */}
         </section>
       </>
     );

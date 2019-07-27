@@ -38,18 +38,13 @@ export default class Header extends Component {
     );
   }
 
-  // toggleLoggedIn() {
-  //   const loginState = window.localStorage.getItem(config.TOKEN_KEY);
-  //   this.setState({ isLoggedIn: loginState });
-  // }
-
   render() {
     return (
       <AppContext.Consumer>
         {value => (
           <nav className="Header">
             <h1>
-              <Link to="/">Blest</Link>
+              <Link to="/">BLest</Link>
             </h1>
             {value.state.isLoggedIn
               ? this.renderLogoutLink()
