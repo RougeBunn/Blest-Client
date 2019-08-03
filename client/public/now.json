@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "alias": "blest-app",
+  "name": "Blest",
+  "routes": [
+    {
+      "src": "^/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": ".*",
+      "dest": "/index.html"
+    }
+  ]
+}

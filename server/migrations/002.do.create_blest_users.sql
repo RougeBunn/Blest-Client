@@ -14,3 +14,4 @@ ALTER TABLE blest_list
     author_id INTEGER REFERENCES blest_users(id)
     ON DELETE SET NULL;
 
+
