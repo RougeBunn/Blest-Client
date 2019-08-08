@@ -3,7 +3,7 @@ import config from '../config';
 
 const ListApiService = {
   getUserWithBlessings(userId) {
-    return fetch(`${config.API_ENDPOINT}/users/${userId}`, {
+    return fetch(`${config.API_ENDPOINT}/api/users/${userId}`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`
       }
@@ -12,7 +12,7 @@ const ListApiService = {
     );
   },
   getUserPage(userId) {
-    return fetch(`${config.API_ENDPOINT}/userpage/${userId}`, {
+    return fetch(`${config.API_ENDPOINT}/api/userpage/${userId}`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`
       }
@@ -21,7 +21,7 @@ const ListApiService = {
     );
   },
   getUserBlessings(userId) {
-    return fetch(`${config.API_ENDPOINT}/userpage/${userId}/blesspage`, {
+    return fetch(`${config.API_ENDPOINT}/api/userpage/${userId}/blesspage`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`
       }
@@ -30,7 +30,7 @@ const ListApiService = {
     );
   },
   addBlessing(blessing) {
-    return fetch(`${config.API_ENDPOINT}/blessings`, {
+    return fetch(`${config.API_ENDPOINT}/api/blessings`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -41,7 +41,7 @@ const ListApiService = {
     );
   },
   deleteBlessing(id) {
-    return fetch(`${config.API_ENDPOINT}/blessings/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/api/blessings/${id}`, {
       method: 'DELETE',
       authorization: `Bearer ${TokenService.getAuthToken()}`
     }).then(res =>
@@ -49,7 +49,7 @@ const ListApiService = {
     );
   },
   postBlessing(blessId, text) {
-    return fetch(`${config.API_ENDPOINT}/blesspage`, {
+    return fetch(`${config.API_ENDPOINT}/api/blesspage`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
