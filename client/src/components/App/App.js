@@ -127,7 +127,7 @@ class App extends Component {
               /> */}
               {/* <PrivateRoute path={'/userpage/:userId'} component={UserPage} /> */}
               <PrivateRoute
-                path={'/userpage/:userId'}
+                path={`/userpage/${userId}`}
                 component={props => (
                   <UserPage
                     {...props}
@@ -137,7 +137,7 @@ class App extends Component {
                 )}
               />
               <PrivateRoute
-                path={'/blesspage/:userId'}
+                path={`/blesspage/${userId}`}
                 component={props => (
                   <BlessPage
                     {...props}
