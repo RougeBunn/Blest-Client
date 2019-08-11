@@ -18,8 +18,41 @@ export default class Header extends Component {
     console.log('loggedin State', this.props.state);
   };
 
-  renderLogoutLink() {
-    return (
+  // renderLogoutLink() {
+  //   return (
+  //     <div className="Header__logged-in">
+  //       <Link to={`/userpage/${this.context.userId}`}>Your List</Link>
+  //       <Link onClick={this.handleLogoutClick} to="/">
+  //         Logout
+  //       </Link>
+  //     </div>
+  //   );
+  // }
+
+  // renderLoginLink() {
+  //   return (
+  //     <div className="Header__not-logged-in">
+  //       <Link to="/login">Log in</Link>
+  //       <Link to="/register">Sign Up</Link>
+  //     </div>
+  //   );
+  // }
+
+  render() {
+    // return (
+    //   <AppContext.Consumer>
+    //     {value => (
+    //       <nav className="Header">
+    //         <h1>
+    //           <Link to="/">BLest</Link>
+    //         </h1>
+    //         {value.state.isLoggedIn
+    //           ? this.renderLogoutLink()
+    //           : this.renderLoginLink()}
+    //       </nav>
+    //     )}
+    //   </AppContext.Consumer>
+    const logOutLink = (
       <div className="Header__logged-in">
         <Link to={`/userpage/${this.context.userId}`}>Your List</Link>
         <Link onClick={this.handleLogoutClick} to="/">
@@ -27,31 +60,22 @@ export default class Header extends Component {
         </Link>
       </div>
     );
-  }
-
-  renderLoginLink() {
-    return (
+    const logInLink = (
       <div className="Header__not-logged-in">
         <Link to="/login">Log in</Link>
         <Link to="/register">Sign Up</Link>
       </div>
     );
-  }
-
-  render() {
     return (
       <AppContext.Consumer>
-        {value => (
-          <nav className="Header">
-            <h1>
-              <Link to="/">BLest</Link>
-            </h1>
-            {value.state.isLoggedIn
-              ? this.renderLogoutLink()
-              : this.renderLoginLink()}
-          </nav>
-        )}
+        <nav className="Header">
+          <h1>
+            <Link to="/">BLest</Link>
+          </h1>
+          {value.state.isLoggedIn ? logOutLink : logInLink}
+        </nav>
       </AppContext.Consumer>
     );
+    // );
   }
 }
