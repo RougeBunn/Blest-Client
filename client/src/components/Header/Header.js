@@ -73,7 +73,7 @@ export default class Header extends Component {
             <h1>
               <Link to="/">BLest</Link>
             </h1>
-            {value.state.isLoggedIn ? logOutLink() : logInLink()}
+            {value.state.isLoggedIn ? logOutLink : logInLink}
           </nav>
         )}
       </AppContext.Consumer>
