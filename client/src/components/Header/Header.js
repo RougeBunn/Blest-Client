@@ -66,7 +66,7 @@ export default class Header extends Component {
         <Link to="/register">Sign Up</Link>
       </div>
     );
-    const isLoggedIn = this.state.isLoggedIn;
+    const isLoggedIn = this.props.isLoggedIn;
     return (
       <AppContext.Consumer>
         <nav className="Header">
