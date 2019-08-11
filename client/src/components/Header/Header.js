@@ -66,16 +66,15 @@ export default class Header extends Component {
         <Link to="/register">Sign Up</Link>
       </div>
     );
+    const isLoggedIn = this.state.isLoggedIn;
     return (
       <AppContext.Consumer>
-        {value => (
-          <nav className="Header">
-            <h1>
-              <Link to="/">BLest</Link>
-            </h1>
-            {value.state.isLoggedIn ? logOutLink : logInLink}
-          </nav>
-        )}
+        <nav className="Header">
+          <h1>
+            <Link to="/">BLest</Link>
+          </h1>
+          {isLoggedIn ? logOutLink : logInLink}
+        </nav>
       </AppContext.Consumer>
     );
   }
