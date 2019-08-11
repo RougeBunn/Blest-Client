@@ -68,14 +68,15 @@ export default class Header extends Component {
     );
     return (
       <AppContext.Consumer>
-        <nav className="Header">
-          <h1>
-            <Link to="/">BLest</Link>
-          </h1>
-          {this.props.isLoggedIn ? logOutLink : logInLink}
-        </nav>
+        {value => (
+          <nav className="Header">
+            <h1>
+              <Link to="/">BLest</Link>
+            </h1>
+            {value.state.isLoggedIn ? logOutLink() : logInLink()}
+          </nav>
+        )}
       </AppContext.Consumer>
     );
-    // );
   }
 }
