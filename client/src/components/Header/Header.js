@@ -27,9 +27,7 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div className="Header__logged-in">
-        <Link to={`/userpage/${this.props.match.params.userId}`}>
-          Your List
-        </Link>
+        {/* <Link to={`/userpage/${this.context.userId}`}>Your List</Link> */}
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
