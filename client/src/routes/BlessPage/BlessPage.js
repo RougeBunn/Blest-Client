@@ -7,11 +7,11 @@ export default class BlessPage extends Component {
     title: ''
   };
 
-  componentDidMount() {
-    // const { userId } = this.props.match.params;
-    const userId = this.props.match.params.userId;
-    this.props.fetchBlessings(userId);
-  }
+  // componentDidMount() {
+  //   const { userId } = this.props.match.params;
+  //   const userId = this.props.match.params.userId;
+  //   this.props.fetchBlessings(userId);
+  // }
   render() {
     return (
       <>
