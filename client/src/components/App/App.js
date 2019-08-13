@@ -23,7 +23,6 @@ class App extends Component {
     isLoggedIn: false,
     blessingsFetched: false,
     blessings: []
-
     // listItems: []
   };
 
