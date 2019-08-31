@@ -12,7 +12,7 @@ export default class Header extends Component {
   };
 
   componentDidMount() {
-    console.log('BUNNNN', this.props);
+    console.log('BUNNNNNY', this.props.match.params);
     const { userId } = this.props.match.params;
     this.props.fetchBlessings(userId);
   }
@@ -25,6 +25,7 @@ export default class Header extends Component {
   };
 
   renderLogoutLink() {
+    console.log('BUNNNNNY2', this.props.match.params);
     const { userId } = this.props.match.params;
     return (
       <div className="Header__logged-in">
