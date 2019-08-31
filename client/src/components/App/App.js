@@ -107,7 +107,14 @@ class App extends Component {
       >
         <div className="App">
           <header className="App__header">
-            <Header {...this.props} setLoggedInState={this.setLoggedInState} />
+            <Header
+              match={{
+                params: {
+                  userId: 1234
+                }
+              }}
+              setLoggedInState={this.setLoggedInState}
+            />
           </header>
           <main className="App__main">
             {this.state.hasError && (
