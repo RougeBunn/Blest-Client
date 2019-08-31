@@ -110,7 +110,11 @@ class App extends Component {
             <Route
               path={'/'}
               component={props => (
-                <Header {...props} setLoggedInState={this.setLoggedInState} />
+                <Header
+                  {...props}
+                  fetchBlessings={this.fetchBlessings}
+                  setLoggedInState={this.setLoggedInState}
+                />
               )}
             />
           </header>
