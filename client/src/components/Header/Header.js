@@ -14,7 +14,7 @@ export default class Header extends Component {
   componentDidMount() {
     console.log('BUNNNN', this.props);
     // const { userId } = this.props.match.params;
-    const userId = this.props.match.params.userId;
+    // const userId = this.props.match.params.userId;
     this.props.fetchBlessings(userId);
   }
 
@@ -28,9 +28,8 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div className="Header__logged-in">
-        <Link to={`/userpage/${this.props.match.params.userId}`}>
-          Your List
-        </Link>
+        {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
+        <Link to={`/userpage/${userId}`}>Your List</Link>
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
