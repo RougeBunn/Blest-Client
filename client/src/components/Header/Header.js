@@ -28,7 +28,7 @@ export default class Header extends Component {
     return (
       <div className="Header__logged-in">
         {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
-        <Link to={`/userpage/:userId`}>Your List</Link>
+        <Link to={`/userpage/${userId}`}>Your List</Link>
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
