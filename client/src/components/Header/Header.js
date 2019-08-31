@@ -25,6 +25,7 @@ export default class Header extends Component {
   };
 
   renderLogoutLink() {
+    const { userId } = this.props.match.params;
     return (
       <div className="Header__logged-in">
         {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
