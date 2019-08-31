@@ -17,6 +17,7 @@ export default class LoginPage extends Component {
     // const destination = location.state || {}.from || '/';
     // history.push(destination);
     this.props.history.push(`/userpage/${userId}`);
+    localStorage.setItem('userId', userId);
   };
 
   render() {

@@ -107,15 +107,9 @@ class App extends Component {
       >
         <div className="App">
           <header className="App__header">
-            <Route
-              path={'/'}
-              component={props => (
-                <Header
-                  {...props}
-                  fetchBlessings={this.fetchBlessings}
-                  setLoggedInState={this.setLoggedInState}
-                />
-              )}
+            <Header
+              fetchBlessings={this.fetchBlessings}
+              setLoggedInState={this.setLoggedInState}
             />
           </header>
           <main className="App__main">

@@ -11,10 +11,17 @@ export default class Header extends Component {
     toggleLoggedIn: () => {}
   };
 
+  state = {};
+
   componentDidMount() {
-    console.log('BUNNNNNY', this.props.match.params);
-    const { userId } = this.props.match.params;
-    this.props.fetchBlessings(userId);
+    const userId = localStorage.getItem('userId');
+    console.log(userId);
+    if (userId) {
+      this.props.fetchBlessings(userId);
+      this.setState({
+        userId
+      });
+    }
   }
 
   handleLogoutClick = () => {
@@ -25,8 +32,7 @@ export default class Header extends Component {
   };
 
   renderLogoutLink() {
-    console.log('BUNNNNNY2', this.props.match.params);
-    const { userId } = this.props.match.params;
+    const { userId } = this.state;
     return (
       <div className="Header__logged-in">
         {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
