@@ -15,7 +15,7 @@ export default class Header extends Component {
 
   componentDidMount() {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
+    console.log('CUPHEAD', userId);
     if (userId) {
       this.props.fetchBlessings(userId);
       this.setState({
@@ -33,6 +33,7 @@ export default class Header extends Component {
 
   renderLogoutLink() {
     const { userId } = this.state;
+    console.log('TEAPOTT', userId);
     return (
       <div className="Header__logged-in">
         {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
