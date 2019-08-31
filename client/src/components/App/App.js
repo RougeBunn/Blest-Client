@@ -107,7 +107,7 @@ class App extends Component {
       >
         <div className="App">
           <header className="App__header">
-            <Header setLoggedInState={this.setLoggedInState} />
+            <Header {...props} setLoggedInState={this.setLoggedInState} />
           </header>
           <main className="App__main">
             {this.state.hasError && (
