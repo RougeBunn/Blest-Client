@@ -91,5 +91,10 @@ export default class Header extends Component {
 }
 
 Header.defaultProps = {
-  blessings: []
+  blessings: [],
+  match: {
+    params: {
+      userId: 1234
+    }
+  }
 };
