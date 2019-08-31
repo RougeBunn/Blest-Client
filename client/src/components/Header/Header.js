@@ -13,8 +13,7 @@ export default class Header extends Component {
 
   componentDidMount() {
     console.log('BUNNNN', this.props);
-    // const { userId } = this.props.match.params;
-    // const userId = this.props.match.params.userId;
+    const { userId } = this.props.match.params;
     this.props.fetchBlessings(userId);
   }
 
@@ -91,10 +90,5 @@ export default class Header extends Component {
 }
 
 Header.defaultProps = {
-  blessings: [],
-  match: {
-    params: {
-      userId: 1234
-    }
-  }
+  blessings: []
 };
