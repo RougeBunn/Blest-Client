@@ -12,6 +12,7 @@ export default class Header extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     // const { userId } = this.props.match.params;
     const userId = this.props.match.params.userId;
     this.props.fetchBlessings(userId);
