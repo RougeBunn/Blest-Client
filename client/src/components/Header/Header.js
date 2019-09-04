@@ -24,6 +24,10 @@ export default class Header extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState);
+  }
+
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
     localStorage.removeItem('userId');
