@@ -20,17 +20,7 @@ export default class BlessPage extends Component {
         </header>
         <section>
           <form id="record-blessing">
-            <div className="form-section">
-              {/* <input
-                    type="text"
-                    name="title"
-                    className="title"
-                    placeholder="~Your Blessings~"
-                    // value={this.state.title}
-                    // onChange={this.handleTitleChange}
-                    // required
-                  /> */}
-            </div>
+            <div className="form-section"></div>
             <div className="form-section">
               <label htmlFor="List" />
               {this.props.blessings.map(blessing => (

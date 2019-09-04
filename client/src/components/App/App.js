@@ -94,7 +94,6 @@ class App extends Component {
     }
   }
   render() {
-    console.log('current state', this.state);
     return (
       <AppContext.Provider
         value={{

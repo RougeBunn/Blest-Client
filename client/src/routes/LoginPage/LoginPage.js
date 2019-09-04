@@ -25,7 +25,6 @@ export default class LoginPage extends Component {
       <AppContext.Consumer>
         {value => (
           <Section className="LoginPage">
-            {console.log('current value', value)}
             <h2>Login</h2>
             <LoginForm
               onLoginSuccess={this.handleLoginSuccess}

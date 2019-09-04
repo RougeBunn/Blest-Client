@@ -10,8 +10,8 @@ export default class UserPage extends Component {
     const userId = this.props.match.params.userId;
     this.props.fetchBlessings(userId);
   }
+
   render() {
-    console.log('userpage render');
     return (
       <>
         {/** <> === <React.Fragment> */}
