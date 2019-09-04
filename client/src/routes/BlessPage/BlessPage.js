@@ -20,7 +20,6 @@ export default class BlessPage extends Component {
         </header>
         <section>
           <form id="record-blessing">
-            <div className="form-section"></div>
             <div className="form-section">
               <label htmlFor="List" />
               {this.props.blessings.map(blessing => (

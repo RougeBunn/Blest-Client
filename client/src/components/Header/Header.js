@@ -58,9 +58,9 @@ export default class Header extends Component {
   render() {
     return (
       <AppContext.Consumer>
-        {console.log('Header state:', this.state)}
         {value => (
           <nav className="Header">
+            {console.log('Header state:', this.state)}
             <h1>
               <Link to="/">BLest</Link>
             </h1>
