@@ -25,7 +25,15 @@ export default class Header extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState);
+    if (!prevState.userId) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.props.fetchBlessings(userId);
+        this.setState({
+          userId
+        });
+      }
+    }
   }
 
   handleLogoutClick = () => {
