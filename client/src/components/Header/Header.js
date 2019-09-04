@@ -26,6 +26,7 @@ export default class Header extends Component {
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
+    localStorage.removeItem('userId');
     console.log('loggedin props', this.props);
     this.props.setLoggedInState(false);
     console.log('loggedin State', this.props.state);
