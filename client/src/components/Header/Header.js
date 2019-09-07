@@ -15,7 +15,6 @@ export default class Header extends Component {
 
   componentDidMount() {
     const userId = localStorage.getItem('userId');
-    console.log('Did Mount', userId);
     if (userId) {
       this.props.fetchBlessings(userId);
       this.setState({
@@ -39,14 +38,11 @@ export default class Header extends Component {
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
     localStorage.removeItem('userId');
-    console.log('loggedin props', this.props);
     this.props.setLoggedInState(false);
-    console.log('loggedin State', this.props.state);
   };
 
   renderLogoutLink() {
     const { userId } = this.state;
-    console.log('renderLogoutLink', userId);
     return (
       <div className="Header__logged-in">
         {/* <Link to={`/userpage/${this.props.match.params.userId}`}> */}
@@ -72,7 +68,6 @@ export default class Header extends Component {
       <AppContext.Consumer>
         {value => (
           <nav className="Header">
-            {console.log('Header state:', this.state)}
             <h1>
               <Link to="/">BLest</Link>
             </h1>

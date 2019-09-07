@@ -39,7 +39,6 @@ class App extends Component {
    * @param userId number
    */
   fetchBlessings = userId => {
-    console.log('user Id:', userId);
     if (this.state.blessingsFetched === false) {
       ListApiService.getUserWithBlessings(userId).then(
         blessingsFetchedFromAPI => {
